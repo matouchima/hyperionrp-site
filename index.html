@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperionRP - Serveur Minecraft RP</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="hyperionrp-fond_1752010784.png" alt="Bannière HyperionRP" class="banner">
+        <div class="header-text">
+            <h1>HyperionRP</h1>
+            <p>Plonge dans un monde où chaque joueur écrit sa propre histoire — bienvenue sur HyperionRP</p>
+        </div>
+    </header>
+    <section class="info">
+        <h2>🎮 Adresse du serveur</h2>
+        <p id="server-ip">hyperionrp.aternos.me</p>
+        <button onclick="copyIP()">Copier l'IP</button>
+
+        <h2>💬 Rejoins notre Discord</h2>
+        <a href="https://discord.gg/fgDnGahS" class="discord-button" target="_blank">Rejoindre le Discord</a>
+
+        <h2>📊 Statut du serveur</h2>
+        <div id="server-status">Chargement...</div>
+    </section>
+<section class="staff">
+    <h2>👥 Équipe du serveur</h2>
+    <div class="staff-grid">
+        <div class="staff-card">
+            <img src="https://minotar.net/avatar/MrMatouchima/100" alt="Avatar de MrMatouchima">
+            <h3>MrMatouchima</h3>
+            <span class="badge fondateur">Fondateur</span>
+            <p>Créateur du serveur HyperionRP, passionné de RP et d'aventure Minecraft.</p>
+        </div>
+        <div class="staff-card">
+            <img src="https://minotar.net/avatar/AdminPseudo/100" alt="Avatar Admin">
+            <h3>AdminPseudo</h3>
+            <span class="badge admin">Administrateur</span>
+            <p>Responsable de la modération et des événements communautaires.</p>
+        </div>
+        <div class="staff-card">
+            <img src="https://minotar.net/avatar/ModoPseudo/100" alt="Avatar Modo">
+            <h3>ModoPseudo</h3>
+            <span class="badge modo">Modérateur</span>
+            <p>Assure le respect des règles et accompagne les nouveaux joueurs.</p>
+        </div>
+        <div class="staff-card">
+            <img src="https://minotar.net/avatar/DevPseudo/100" alt="Avatar Dev">
+            <h3>DevPseudo</h3>
+            <span class="badge dev">Développeur</span>
+            <p>Développe les fonctionnalités du serveur et du site web.</p>
+        </div>
+    </div>
+</section>
+
+    <img src="6422404-256-k930266_preview_rev_1.png" alt="Mascotte Creeper Girl" class="mascot">
+    <script>
+        function copyIP() {
+            const ip = document.getElementById("server-ip").textContent;
+            navigator.clipboard.writeText(ip);
+            alert("IP copiée : " + ip);
+        }
+
+        fetch("https://api.mcsrvstat.us/2/hyperionrp.aternos.me")
+        .then(response => response.json())
+        .then(data => {
+            const status = document.getElementById("server-status");
+            if (data.online) {
+                status.innerHTML = `🟢 En ligne : ${data.players.online} joueur(s) connecté(s)`;
+            } else {
+                status.innerHTML = `🔴 Serveur hors ligne`;
+            }
+        })
+        .catch(error => {
+            document.getElementById("server-status").innerText = "Erreur lors du chargement du statut.";
+            console.error("Erreur API :", error);
+        });
+    </script>
+</body>
+</html>
